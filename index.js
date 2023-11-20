@@ -7,6 +7,7 @@ const mongoClient = require("mongodb")
 const session = require("express-session")
 const mongoDBSession = require("connect-mongodb-session")(session)
 const mongoose = require("mongoose")
+mongoose.set('useNewUrlParser', true);
 
 const mongo_funcs = require("./js/mongoDB_funcs")
 const fetch_funcs = require("./js/fetch_funcs")
