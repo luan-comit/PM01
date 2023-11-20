@@ -1,4 +1,8 @@
 const mongoClient = require("mongodb").MongoClient
+mongoClient.set('useNewUrlParser', true);
+mongoClient.set('useFindAndModify', false);
+mongoClient.set('useCreateIndex', true);
+mongoClient.set('useUnifiedTopology', true);
 
 const dotenv = require("dotenv")
 dotenv.config()

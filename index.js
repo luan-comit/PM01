@@ -8,6 +8,13 @@ const session = require("express-session")
 const mongoDBSession = require("connect-mongodb-session")(session)
 const mongoose = require("mongoose")
 mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+mongoose.set('useUnifiedTopology', true);
+mongoClient.set('useNewUrlParser', true);
+mongoClient.set('useFindAndModify', false);
+mongoClient.set('useCreateIndex', true);
+mongoClient.set('useUnifiedTopology', true);
 
 const mongo_funcs = require("./js/mongoDB_funcs")
 const fetch_funcs = require("./js/fetch_funcs")
