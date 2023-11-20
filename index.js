@@ -7,10 +7,10 @@ const mongoClient = require("mongodb")
 const session = require("express-session")
 const mongoDBSession = require("connect-mongodb-session")(session)
 const mongoose = require("mongoose")
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useFindAndModify', false);
-mongoose.set('useCreateIndex', true);
-mongoose.set('useUnifiedTopology', true);
+mongoose.set("useNewUrlParser", true)
+mongoose.set("useFindAndModify", false)
+mongoose.set("useCreateIndex", true)
+mongoose.set("useUnifiedTopology", true)
 
 const mongo_funcs = require("./js/mongoDB_funcs")
 const fetch_funcs = require("./js/fetch_funcs")
@@ -47,9 +47,9 @@ app.set("view engine", "pug")
 
 app.use(express.static(__dirname + "/public"))
 
-
 mongoose
   .connect(_mongoUrl, {
+    useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
   })
@@ -79,8 +79,7 @@ app.listen(port, function () {
 
 ///////////////////////////////////// GET CATEGORIES INFORMATION  //////////////////////////////////
 function getCategories() {
-  mongoClient.connect(_mongoUrl, 
- {useNewUrlParser: true}, function (err, db) {
+  mongoClient.connect(_mongoUrl, { useNewUrlParser: true }, function (err, db) {
     if (err) throw err
     var dbo = db.db(_db)
     dbo
@@ -158,47 +157,50 @@ app.get("/register", function (req, res) {
 
 app.post("/register", function (req, res) {
   console.log(req.body.email)
-  mongoClient.connect(_mongoUrl, 
- {useNewUrlParser: true}, async function (err, db) {
-    if (err) throw err
-    var dbo = db.db(_db)
-    dbo
-      .collection(_usersCollection)
-      .findOne({ email: req.body.email }, function (err, user) {
-        if (err) throw err
-        else {
-          if (!user || user.length === 0 || user == null) {
-            mongo_funcs.insertMongoDB("users", req.body)
-            //res.render('login', { menu: 5,  logged: req.session.isAuth, email: req.session.email});
-            res.render("message", {
-              msgID: 51,
-              message: `new email ${req.body.email} successfully added!`,
-              menu: 5,
-              logged: req.session.isAuth,
-              email: req.session.email,
-            })
-            let demo1 = require("./json/amazon_demo.json")
-            demo1.email = req.body.email
-            let demo2 = require("./json/kijiji_demo.json")
-            demo2.email = req.body.email
-            mongo_funcs.insertMongoDB(_fetchItemsCollection, demo1)
-            mongo_funcs.insertMongoDB(_fetchItemsCollection, demo2)
-            mongo_funcs.insertMongoDB(_itemsGraphCollection, demo1)
-            mongo_funcs.insertMongoDB(_itemsGraphCollection, demo2)
-          } else {
-            //return res.json('email existed, chose another email');
-            res.render("message", {
-              msgID: 52,
-              message: "email existed, chose another email",
-              menu: 5,
-              logged: req.session.isAuth,
-              email: req.session.email,
-            })
+  mongoClient.connect(
+    _mongoUrl,
+    { useNewUrlParser: true },
+    async function (err, db) {
+      if (err) throw err
+      var dbo = db.db(_db)
+      dbo
+        .collection(_usersCollection)
+        .findOne({ email: req.body.email }, function (err, user) {
+          if (err) throw err
+          else {
+            if (!user || user.length === 0 || user == null) {
+              mongo_funcs.insertMongoDB("users", req.body)
+              //res.render('login', { menu: 5,  logged: req.session.isAuth, email: req.session.email});
+              res.render("message", {
+                msgID: 51,
+                message: `new email ${req.body.email} successfully added!`,
+                menu: 5,
+                logged: req.session.isAuth,
+                email: req.session.email,
+              })
+              let demo1 = require("./json/amazon_demo.json")
+              demo1.email = req.body.email
+              let demo2 = require("./json/kijiji_demo.json")
+              demo2.email = req.body.email
+              mongo_funcs.insertMongoDB(_fetchItemsCollection, demo1)
+              mongo_funcs.insertMongoDB(_fetchItemsCollection, demo2)
+              mongo_funcs.insertMongoDB(_itemsGraphCollection, demo1)
+              mongo_funcs.insertMongoDB(_itemsGraphCollection, demo2)
+            } else {
+              //return res.json('email existed, chose another email');
+              res.render("message", {
+                msgID: 52,
+                message: "email existed, chose another email",
+                menu: 5,
+                logged: req.session.isAuth,
+                email: req.session.email,
+              })
+            }
           }
-        }
-      })
-    db.close()
-  })
+        })
+      db.close()
+    }
+  )
 })
 
 app.get("/login", function (req, res) {
@@ -211,8 +213,7 @@ app.get("/login", function (req, res) {
 app.post("/login", function (req, res) {
   var { email, password } = req.body
   console.log("params: ", email)
-  mongoClient.connect(_mongoUrl, 
- {useNewUrlParser: true}, function (err, db) {
+  mongoClient.connect(_mongoUrl, { useNewUrlParser: true }, function (err, db) {
     if (err) throw err
     var dbo = db.db(_db)
     dbo
@@ -260,65 +261,68 @@ app.get("/monitor", function (req, res) {
   }
   // querySavedItemMongoDB query all the saved items of the logged-in user email
   async function querySavedItemMongoDB() {
-    mongoClient.connect(_mongoUrl, 
- {useNewUrlParser: true}, function (err, db) {
-      if (err) throw err
-      var dbo = db.db(_db)
-      dbo
-        .collection(_fetchItemsCollection)
-        .find({ email: req.session.email })
-        .toArray(function (err, records) {
-          if (err) throw err
-          db.close()
-          if (!records || records == null || records.length === 0) {
-            console.log(
-              "values send to monitor page is null ",
-              req.session.email
-            )
-            res.render("monitor", {
-              menu: 2,
-              listItems: false,
-              logged: req.session.isAuth,
-              email: req.session.email,
-            })
-          } else {
-            records.map(function (record, index) {
-              record.pos = index
-              let rawDate = new Date(record.date)
-              let displaydate =
-                rawDate.getDate() +
-                "/" +
-                (rawDate.getMonth() + 1) +
-                "/" +
-                rawDate.getFullYear() +
-                "\n" +
-                rawDate.getHours() +
-                ":" +
-                rawDate.getMinutes()
-              record.date = displaydate
-              //console.log(record.date);
-              if (record.saving) {
-                let lens = record.saving.length
-                let lenp = record.price.length
-                record.price_list =
-                  "$" +
-                  (
-                    parseFloat(record.price.slice(1, lenp)) +
-                    parseFloat(record.saving.slice(6, lens))
-                  ).toString()
-                //console.log("Price listed after parsed saving + ", record.price_list);
-              }
-            })
-            //console.log("values send to monitor.pug ::::::::", req.session.email);
-            res.render("monitor", {
-              menu: 2,
-              listItems: records,
-              logged: req.session.isAuth,
-              email: req.session.email,
-            })
-          }
-        })
-    })
+    mongoClient.connect(
+      _mongoUrl,
+      { useNewUrlParser: true },
+      function (err, db) {
+        if (err) throw err
+        var dbo = db.db(_db)
+        dbo
+          .collection(_fetchItemsCollection)
+          .find({ email: req.session.email })
+          .toArray(function (err, records) {
+            if (err) throw err
+            db.close()
+            if (!records || records == null || records.length === 0) {
+              console.log(
+                "values send to monitor page is null ",
+                req.session.email
+              )
+              res.render("monitor", {
+                menu: 2,
+                listItems: false,
+                logged: req.session.isAuth,
+                email: req.session.email,
+              })
+            } else {
+              records.map(function (record, index) {
+                record.pos = index
+                let rawDate = new Date(record.date)
+                let displaydate =
+                  rawDate.getDate() +
+                  "/" +
+                  (rawDate.getMonth() + 1) +
+                  "/" +
+                  rawDate.getFullYear() +
+                  "\n" +
+                  rawDate.getHours() +
+                  ":" +
+                  rawDate.getMinutes()
+                record.date = displaydate
+                //console.log(record.date);
+                if (record.saving) {
+                  let lens = record.saving.length
+                  let lenp = record.price.length
+                  record.price_list =
+                    "$" +
+                    (
+                      parseFloat(record.price.slice(1, lenp)) +
+                      parseFloat(record.saving.slice(6, lens))
+                    ).toString()
+                  //console.log("Price listed after parsed saving + ", record.price_list);
+                }
+              })
+              //console.log("values send to monitor.pug ::::::::", req.session.email);
+              res.render("monitor", {
+                menu: 2,
+                listItems: records,
+                logged: req.session.isAuth,
+                email: req.session.email,
+              })
+            }
+          })
+      }
+    )
   }
 })
 
@@ -329,8 +333,7 @@ app.get("/displaygraph", function (req, res) {
 
 app.post("/displaygraph", function (req, res) {
   //res.json(req.body);
-  mongoClient.connect(_mongoUrl, 
- {useNewUrlParser: true}, function (err, db) {
+  mongoClient.connect(_mongoUrl, { useNewUrlParser: true }, function (err, db) {
     if (err) throw err
     var dbo = db.db(_db)
     dbo
@@ -528,27 +531,30 @@ app.post("/updatePriceDate", function (req, res) {
   }
 
   async function updatePriceDateMongoDB() {
-    mongoClient.connect(_mongoUrl, 
- {useNewUrlParser: true}, function (err, db) {
-      if (err) throw err
-      var dbo = db.db(_db)
-      dbo.collection(_itemsGraphCollection).updateOne(
-        { url: req.body.url },
-        {
-          $push: {
-            price_date_Arr: {
-              price: itemUpdate.price,
-              date: itemUpdate.date,
+    mongoClient.connect(
+      _mongoUrl,
+      { useNewUrlParser: true },
+      function (err, db) {
+        if (err) throw err
+        var dbo = db.db(_db)
+        dbo.collection(_itemsGraphCollection).updateOne(
+          { url: req.body.url },
+          {
+            $push: {
+              price_date_Arr: {
+                price: itemUpdate.price,
+                date: itemUpdate.date,
+              },
             },
           },
-        },
-        function (err, res) {
-          if (err) throw err
-          // console.log("price & date added ");
-        }
-      )
-      db.close()
-    })
+          function (err, res) {
+            if (err) throw err
+            // console.log("price & date added ");
+          }
+        )
+        db.close()
+      }
+    )
   }
 
   async function getItemPrice(_category, _url) {
@@ -708,35 +714,38 @@ app.post("/saveItem", isAuth, function (req, res) {
 
   function saveItemToMongoDB(url) {
     //check if item (url) exist in items_graph collection and copy if exist
-    mongoClient.connect(_mongoUrl, 
- {useNewUrlParser: true}, function (err, db) {
-      if (err) throw err
-      var dbo = db.db(_db)
-      console.log("url to find::::::", url)
-      dbo
-        .collection(_itemsGraphCollection)
-        .findOne({ url: url }, function (err, record) {
-          if (err) {
-            throw err
-          } else {
-            if (record == null) {
-              console.log(
-                "Item not in Graph collection. Goto new item process ::::: "
-              )
-              saveNewItemToBothMongoDB()
+    mongoClient.connect(
+      _mongoUrl,
+      { useNewUrlParser: true },
+      function (err, db) {
+        if (err) throw err
+        var dbo = db.db(_db)
+        console.log("url to find::::::", url)
+        dbo
+          .collection(_itemsGraphCollection)
+          .findOne({ url: url }, function (err, record) {
+            if (err) {
+              throw err
             } else {
-              console.log(
-                "Item already in Graph collection. Now check in item_fetch collection ::::: "
-              )
-              itemToSave.title = record.title
-              itemToSave.price_list = record.price_list
-              itemToSave.price = record.price
-              saveNewItemToFetchMongoDB()
+              if (record == null) {
+                console.log(
+                  "Item not in Graph collection. Goto new item process ::::: "
+                )
+                saveNewItemToBothMongoDB()
+              } else {
+                console.log(
+                  "Item already in Graph collection. Now check in item_fetch collection ::::: "
+                )
+                itemToSave.title = record.title
+                itemToSave.price_list = record.price_list
+                itemToSave.price = record.price
+                saveNewItemToFetchMongoDB()
+              }
             }
-          }
-        })
-      db.close()
-    })
+          })
+        db.close()
+      }
+    )
   }
 
   function saveNewItemToBothMongoDB() {
@@ -782,54 +791,57 @@ app.post("/saveItem", isAuth, function (req, res) {
   }
 
   function saveNewItemToFetchMongoDB() {
-    mongoClient.connect(_mongoUrl, 
- {useNewUrlParser: true}, function (err, db) {
-      if (err) throw err
-      var dbo = db.db(_db)
-      dbo
-        .collection(_fetchItemsCollection)
-        .findOne(
-          { url: url, email: req.session.email },
-          function (err, result) {
-            if (err) {
-              throw err
-            } else {
-              if (!result || result.length == 0) {
-                console.log(
-                  "Item not in items_fetch collection. Now insert item to items_fetch collections ::::: "
-                )
-                if (!itemToSave.price || itemToSave.price == "") {
-                  if (itemToSave.price_list) {
-                    itemToSave.price = itemToSave.price_list
-                  } else {
-                    itemToSave.price = "$0"
-                  }
-                }
-                mongo_funcs.insertMongoDB(_fetchItemsCollection, itemToSave)
-                res.render("message", {
-                  msgID: 1,
-                  message: "Item being inserted to item collections",
-                  menu: 1,
-                  logged: req.session.isAuth,
-                  email: req.session.email,
-                })
+    mongoClient.connect(
+      _mongoUrl,
+      { useNewUrlParser: true },
+      function (err, db) {
+        if (err) throw err
+        var dbo = db.db(_db)
+        dbo
+          .collection(_fetchItemsCollection)
+          .findOne(
+            { url: url, email: req.session.email },
+            function (err, result) {
+              if (err) {
+                throw err
               } else {
-                console.log(
-                  "Item already in items_fetch collection. No insert "
-                )
-                res.render("message", {
-                  msgID: 1,
-                  message: "Item already existed",
-                  menu: 1,
-                  logged: req.session.isAuth,
-                  email: req.session.email,
-                })
+                if (!result || result.length == 0) {
+                  console.log(
+                    "Item not in items_fetch collection. Now insert item to items_fetch collections ::::: "
+                  )
+                  if (!itemToSave.price || itemToSave.price == "") {
+                    if (itemToSave.price_list) {
+                      itemToSave.price = itemToSave.price_list
+                    } else {
+                      itemToSave.price = "$0"
+                    }
+                  }
+                  mongo_funcs.insertMongoDB(_fetchItemsCollection, itemToSave)
+                  res.render("message", {
+                    msgID: 1,
+                    message: "Item being inserted to item collections",
+                    menu: 1,
+                    logged: req.session.isAuth,
+                    email: req.session.email,
+                  })
+                } else {
+                  console.log(
+                    "Item already in items_fetch collection. No insert "
+                  )
+                  res.render("message", {
+                    msgID: 1,
+                    message: "Item already existed",
+                    menu: 1,
+                    logged: req.session.isAuth,
+                    email: req.session.email,
+                  })
+                }
               }
             }
-          }
-        )
-      db.close()
-    })
+          )
+        db.close()
+      }
+    )
   }
 
   async function saveFetchedItem(_category) {
@@ -904,36 +916,39 @@ app.get("/manageshop", isAuth, function (req, res) {
   queryShopMongoDB()
   // queryShopMongoDB query all the items in the shop collection to display to manageshop.pug
   function queryShopMongoDB() {
-    mongoClient.connect(_mongoUrl, 
- {useNewUrlParser: true}, function (err, db) {
-      if (err) throw err
-      var dbo = db.db(_db)
-      dbo
-        .collection(_shopCollection)
-        .find()
-        .toArray(function (err, records) {
-          if (err) throw err
-          db.close()
-          if (!records || records == null || records.length === 0) {
-            res.render("manageshop", {
-              menu: 3,
-              listItems: false,
-              logged: req.session.isAuth,
-              email: req.session.email,
-            })
-          } else {
-            records.map(function (record, index) {
-              record.pos = index
-            })
-            res.render("manageshop", {
-              menu: 3,
-              listItems: records,
-              logged: req.session.isAuth,
-              email: req.session.email,
-            })
-          }
-        })
-    })
+    mongoClient.connect(
+      _mongoUrl,
+      { useNewUrlParser: true },
+      function (err, db) {
+        if (err) throw err
+        var dbo = db.db(_db)
+        dbo
+          .collection(_shopCollection)
+          .find()
+          .toArray(function (err, records) {
+            if (err) throw err
+            db.close()
+            if (!records || records == null || records.length === 0) {
+              res.render("manageshop", {
+                menu: 3,
+                listItems: false,
+                logged: req.session.isAuth,
+                email: req.session.email,
+              })
+            } else {
+              records.map(function (record, index) {
+                record.pos = index
+              })
+              res.render("manageshop", {
+                menu: 3,
+                listItems: records,
+                logged: req.session.isAuth,
+                email: req.session.email,
+              })
+            }
+          })
+      }
+    )
   }
 })
 
@@ -943,36 +958,39 @@ app.get("/editshopitem/:id", isAuth, async function (req, res) {
 
   // queryShopMongoDB query all the items in the shop collection to display to manageshop.pug
   function queryItemShopMongoDB() {
-    mongoClient.connect(_mongoUrl, 
- {useNewUrlParser: true}, async function (err, db) {
-      if (err) throw err
-      var dbo = db.db(_db)
-      dbo
-        .collection(_shopCollection)
-        .find(filter)
-        .toArray(function (err, item) {
-          if (err) throw err
-          db.close()
-          if (!item || item == null) {
-            //res.json('mongoDB lookup issue !')
-            res.render("message", {
-              msgID: 3,
-              message: "item not found!",
-              menu: 3,
-              logged: req.session.isAuth,
-              email: req.session.email,
-            })
-          } else {
-            console.log(item[0])
-            res.render("editshopitem", {
-              menu: 3,
-              item: item[0],
-              logged: req.session.isAuth,
-              email: req.session.email,
-            })
-          }
-        })
-    })
+    mongoClient.connect(
+      _mongoUrl,
+      { useNewUrlParser: true },
+      async function (err, db) {
+        if (err) throw err
+        var dbo = db.db(_db)
+        dbo
+          .collection(_shopCollection)
+          .find(filter)
+          .toArray(function (err, item) {
+            if (err) throw err
+            db.close()
+            if (!item || item == null) {
+              //res.json('mongoDB lookup issue !')
+              res.render("message", {
+                msgID: 3,
+                message: "item not found!",
+                menu: 3,
+                logged: req.session.isAuth,
+                email: req.session.email,
+              })
+            } else {
+              console.log(item[0])
+              res.render("editshopitem", {
+                menu: 3,
+                item: item[0],
+                logged: req.session.isAuth,
+                email: req.session.email,
+              })
+            }
+          })
+      }
+    )
   }
 })
 
@@ -989,18 +1007,21 @@ app.post("/editshopitem", isAuth, function (req, res) {
   updateItemShopMongoDB()
   // queryShopMongoDB query all the items in the shop collection to display to manageshop.pug
   function updateItemShopMongoDB() {
-    mongoClient.connect(_mongoUrl, 
- {useNewUrlParser: true}, function (err, db) {
-      if (err) throw err
-      var dbo = db.db(_db)
-      dbo
-        .collection(_shopCollection)
-        .updateOne(filter, { $set: newItemValues }, (err, result) => {
-          if (err) throw err
-          console.log("item on shop was updated !")
-          res.redirect("/manageshop")
-        })
-    })
+    mongoClient.connect(
+      _mongoUrl,
+      { useNewUrlParser: true },
+      function (err, db) {
+        if (err) throw err
+        var dbo = db.db(_db)
+        dbo
+          .collection(_shopCollection)
+          .updateOne(filter, { $set: newItemValues }, (err, result) => {
+            if (err) throw err
+            console.log("item on shop was updated !")
+            res.redirect("/manageshop")
+          })
+      }
+    )
   }
 })
 
@@ -1027,36 +1048,39 @@ app.get("/managebilling", isAuth, function (req, res) {
   queryShopMongoDB()
   // queryShopMongoDB query all the items in the shop collection to display to manageshop.pug
   async function queryShopMongoDB() {
-    mongoClient.connect(_mongoUrl, 
- {useNewUrlParser: true}, function (err, db) {
-      if (err) throw err
-      var dbo = db.db(_db)
-      dbo
-        .collection(_paymentsCollection)
-        .find()
-        .toArray(function (err, records) {
-          if (err) throw err
-          db.close()
-          if (!records || records == null || records.length === 0) {
-            res.render("billing", {
-              menu: 3,
-              listItems: false,
-              logged: req.session.isAuth,
-              email: req.session.email,
-            })
-          } else {
-            records.map(function (record, index) {
-              record.pos = index
-            })
-            res.render("billing", {
-              menu: 3,
-              listItems: records,
-              logged: req.session.isAuth,
-              email: req.session.email,
-            })
-          }
-        })
-    })
+    mongoClient.connect(
+      _mongoUrl,
+      { useNewUrlParser: true },
+      function (err, db) {
+        if (err) throw err
+        var dbo = db.db(_db)
+        dbo
+          .collection(_paymentsCollection)
+          .find()
+          .toArray(function (err, records) {
+            if (err) throw err
+            db.close()
+            if (!records || records == null || records.length === 0) {
+              res.render("billing", {
+                menu: 3,
+                listItems: false,
+                logged: req.session.isAuth,
+                email: req.session.email,
+              })
+            } else {
+              records.map(function (record, index) {
+                record.pos = index
+              })
+              res.render("billing", {
+                menu: 3,
+                listItems: records,
+                logged: req.session.isAuth,
+                email: req.session.email,
+              })
+            }
+          })
+      }
+    )
   }
 })
 
