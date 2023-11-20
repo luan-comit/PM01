@@ -1,0 +1,334 @@
+body {
+  padding-top: 20px;
+}
+
+.footer {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-top: 40px;
+  border-top: 1px solid #eee;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  background-color: transparent;
+}
+.jumbotron .btn {
+  padding: 14px 24px;
+  font-size: 21px;
+}
+
+.showuser {
+  font-size:x-small;
+  color: blue;
+}
+.showguest {
+  font-size:x-small;
+  color: rgba(169, 169, 169, 0.842);
+}
+.graph-container{
+  width: 800px;
+  height: auto;
+  border: 1px black solid;
+}
+
+.mygraph{
+  width: 100% ;
+  height: auto;
+}
+/* Customize the nav-justified links to be fill the entire space of the .navbar */
+
+.nav-justified {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.nav-justified > li > a {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 0;
+  font-weight: bold;
+  color: #777;
+  text-align: center;
+  background-color: #e5e5e5; /* Old browsers */
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5), to(#e5e5e5));
+  background-image: -webkit-linear-gradient(top, #f5f5f5 0%, #e5e5e5 100%);
+  background-image:      -o-linear-gradient(top, #f5f5f5 0%, #e5e5e5 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(top), color-stop(0%, #f5f5f5), to(#e5e5e5));
+  background-image:         linear-gradient(top, #f5f5f5 0%, #e5e5e5 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+  background-repeat: repeat-x; /* Repeat the gradient */
+  border-bottom: 1px solid #d5d5d5;
+}
+.nav-justified > .active > a,
+.nav-justified > .active > a:hover,
+.nav-justified > .active > a:focus {
+  background-color: #ddd;
+  background-image: none;
+  -webkit-box-shadow: inset 0 3px 7px rgba(0,0,0,.15);
+          box-shadow: inset 0 3px 7px rgba(0,0,0,.15);
+}
+.nav-justified > li:first-child > a {
+  border-radius: 5px 5px 0 0;
+}
+.nav-justified > li:last-child > a {
+  border-bottom: 0;
+  border-radius: 0 0 5px 5px;
+}
+
+.mytable {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.mytable td, th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.mytable tr:nth-child(even){background-color: #f2f2f2;}
+
+.mytable tr:hover {background-color: #ddd;}
+
+.mytable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+.btn-logout{
+  border: none;
+  align-items: center;
+  font-weight: bold;
+  color: blue;
+  width: 100%;
+}
+.btn-logout:hover{
+  color: red;
+}
+
+.btn-link {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    color: #0000EE;
+    padding: 0;
+    text-decoration: underline;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.btn-link:hover {
+  color: red;
+}
+
+.align-center-td--tbl{
+  align-items: center;
+  align-content: center;
+}
+
+thumbnail-tbl{
+  white-space: nowrap;  /** added **/
+  width: 100%;
+}
+
+.thumbnail-img-td-tbl {
+  display: block;
+  margin: none;
+  padding: 0;
+  align-items: center;
+  width: 30%;
+}
+
+.thumbnail-img-div-cart {
+  display: block;
+  margin: none;
+  padding: 0;
+  align-items: center;
+  width: 30%;
+}
+
+/* hover link to show image */
+a>div { display: none; }
+a:hover>div { display: block; }
+
+/* table in shop.pug */
+
+.shop-img-td-tbl {
+  align-items: center;
+  margin: 10px;
+  padding: 0;
+  width: 50%;
+  display: block;
+}
+
+/* cart in shop.pug */
+
+.cart-img-td-tbl {
+  align-items: center;
+  margin: 10px;
+  padding: 0;
+  width: 7%;
+  display: block;
+}
+
+.mycart {
+  margin-left: 10px;
+  padding: 5px;
+  border-radius: 10px;
+  font-size: medium;
+  float:inherit;
+}
+.mycart:hover {
+  color: red;
+}
+
+.addCart {
+  background-color: blue;
+  color: #FFF;
+  padding: 3px;
+  border-radius: 5px;
+}
+.addCart:hover {
+  color:deeppink;
+}
+
+.td-sumbill {
+  font-size: larger ;
+  font-weight: bolder;
+  color: red
+}
+
+
+/* Form */
+.inputstl { 
+    padding: 9px; 
+    border: solid 1px #0077B0; 
+    outline: 0; 
+    background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #C6ECFF), to(#FFFFFF)); 
+    background: -moz-linear-gradient(top, #FFFFFF, #C6ECFF 1px, #FFFFFF 25px); 
+    box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px; 
+    -moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px; 
+    -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px; 
+} 
+
+.payment-container {
+  margin: none;
+  padding: auto;
+  display: inline-table;
+}
+.payment-container button {
+  border-radius: 35px;
+  background-color:white;
+  border: none;
+  height: 40px;
+  width: fit-content;
+  margin: 20px 100px;
+  align-content:initial;
+ /* display:list-item; */
+}
+
+.contact-left{
+    float: left;
+    width: 25%;
+    border: 2px black solid;
+    margin: 80px 60px;
+    padding: 20px;
+}
+
+
+.contact-right{
+    float: right;
+    width: 50%;
+    margin: 80px 0px;
+    padding: 40px;
+}
+
+/* Style all font awesome icons */
+.fa {
+  padding: 20px;
+  font-size: 70px;
+  width: 100px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.fa:hover {
+  opacity: 0.7;
+  background-color: cadetblue;
+}
+
+
+/* Facebook */
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+  font-size: 150px;
+}
+
+/* Twitter */
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+
+  font-size: 150px;
+}
+
+.fa-linkedin{
+    background-color: #0A66C2;
+    color: white;
+}
+
+.fa-skype{
+    background-color: #2797E1;
+    color: white;
+}
+
+.email-btn{
+    size: auto;
+    background-color:cornflowerblue;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 1.2rem;
+}
+.email-btn:hover{
+    color: rgb(236, 10, 29);
+}
+
+.txt-shadow{
+    text-shadow: 1px 2px rgb(23, 23, 139);
+}
+
+@media (min-width: 768px) {
+  .nav-justified {
+    max-height: 52px;
+  }
+  .nav-justified > li > a {
+    border-right: 1px solid #d5d5d5;
+    border-left: 1px solid #fff;
+  }
+  .nav-justified > li:first-child > a {
+    border-left: 0;
+    border-radius: 5px 0 0 5px;
+  }
+  .nav-justified > li:last-child > a {
+    border-right: 0;
+    border-radius: 0 5px 5px 0;
+  }
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .masthead,
+  .marketing,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}

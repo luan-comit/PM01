@@ -1,0 +1,36 @@
+{
+  "url": "https://www.kijiji.ca/v-classic-cars/calgary/1968-chevelle-ss/1677421202",
+  "date": 1632713511956,
+  "email": "luanlvt@yahoo.com",
+  "category": "Kijiji Classic Car",
+  "img_src": "https://media.kijiji.ca/api/v1/ca-prod-fsbo-ads/images/b1/b1f05058-394e-416d-8386-95cce140f78b?rule=kijijica-640-webp",
+  "title": "1968 Chevelle SS",
+  "price": "$110,900",
+  "address": "Alberta, AB R4J1B6",
+  "price_date_Arr": [
+    {
+      "price": "$110,900",
+      "date": 1621820474761
+    },
+    {
+      "price": "$100,900",
+      "date": 1625101141695
+    },
+    {
+      "price": "$90,900",
+      "date": 1625146573219
+    },
+    {
+      "price": "$80,900",
+      "date": 1625160896256
+    },
+    {
+      "price": "$80,900",
+      "date": 1625349557299
+    },
+    {
+      "price": "$80,900",
+      "date": 1625526258861
+    }
+  ]
+}

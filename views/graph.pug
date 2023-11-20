@@ -1,0 +1,27 @@
+extends ./layout.pug
+block contents
+
+    .container
+        br
+        br
+        h4
+            a(href= graphUrl, target='blank')= graphLabel
+        .jumbotron
+            script(src="https://cdn.jsdelivr.net/npm/chart.js", defer)
+            script.
+                const graphLabel = !{JSON.stringify(graphLabel)};
+                const graphUrl = !{JSON.stringify(graphUrl)};
+                const prices = !{JSON.stringify(arrayPrice)};
+                const dates = !{JSON.stringify(arrayDate)};   
+            script(src="../js/graph.js", defer)
+            div.graph-container
+                canvas.mygraph(id="myGraph")
+            
+        a.btn.btn-lg.btn-success(href='/monitor', role='button') Go back
+            
+            //each item in arrayPrice
+                p= item
+            //each item in arrayDate 
+                p= item
+        footer.footer
+            p © Price Monitor - NodeJS Project last updated Nov. 2023

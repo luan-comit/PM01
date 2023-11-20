@@ -1,0 +1,51 @@
+extends ./layout.pug
+block contents  
+    // Jumbotron
+    .container
+        div
+            h4.form-signin-heading  Fetching Items
+            div
+                form(class='inputstl form-horizontal', action='/fetch', method='POST')
+                    div.form-group
+                        label(class="col-sm-2 control-label", for='category') Chose a category: 
+                        div.col-sm-4
+                            input(class="form-control inputstl", type='text' list='category' name='category')    
+                            datalist(id='category')
+                                    option(value='Kijiji Classic Car')
+                                    option(value='Kijiji Laptop')
+                                    //- option(value='Amazon Laptop')
+                                    //- option(value='Amazon SmartWatch')
+                                    option(value='Amazon HotDeal')
+                                    option(value='Bestbuy Laptop') 
+                                    option(value='Bestbuy Drone') 
+                    div.form-group
+                        label(for="count", class="col-sm-2 control-label") Number of items (1-9)
+                        div.col-sm-4
+                            input(class="form-control inputstl", id='count', type='text' name='count' value=3, pattern="^(([01]?[0-9])|(20))$")
+                    input(class="btn btn-lg btn-block btn-info", type='submit' name='submit')
+
+            hr
+            div 
+                if (linkItems) 
+                    h4.form-signin-heading Fetched Items 
+                    each linkItem in linkItems 
+                        div(style='background-color: whitesmoke; margin: 5px; padding: 5px;')
+                        if (linkItem.link == '')
+                            p           Item number #{linkItem.pos} ::: empty fetched                            
+                        else
+                            form(action='/saveItem' method='POST')
+                                input(type='submit' name='submit' value='Save this item' id='submit' style='width:auto; font-size: large; color: red;')
+                                input(type='text' name='category' value= linkItems[0].cat hidden>)
+                                input(type='checkbox' name='url' value= linkItem.link checked hidden>)
+                                a(href= linkItem.link target='_blank')  Item number #{linkItem.pos} fetched
+                                    p(style='font-size: x-small;') #{linkItem.link}
+                else 
+                    p No item to display
+                //a.btn.btn-lg.btn-success(href='#', role='button') Get started
+            // Site footer
+        footer.footer
+            p © Price Monitor - NodeJS Project last updated Nov. 2023
+
+
+
+        
