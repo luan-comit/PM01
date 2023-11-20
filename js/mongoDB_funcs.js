@@ -10,7 +10,8 @@ const _itemFetchCollection = "items_fetch"
 const _shoppingCollection = "shopping"
 
 async function insertMongoDB(_collection, _object) {
-  mongoClient.connect(_mongoUrl, function (err, db) {
+  mongoClient.connect(_mongoUrl, 
+ {useNewUrlParser: true}, function (err, db) {
     if (err) throw err
     var dbo = db.db(_db)
     dbo.collection(_collection).insertOne(_object, function (err, res) {
@@ -22,7 +23,8 @@ async function insertMongoDB(_collection, _object) {
 }
 
 async function deleteFetchMongoDB(_email, _url) {
-  mongoClient.connect(_mongoUrl, function (err, db) {
+  mongoClient.connect(_mongoUrl, 
+ {useNewUrlParser: true}, function (err, db) {
     if (err) throw err
     var dbo = db.db(_db)
     dbo
@@ -36,7 +38,8 @@ async function deleteFetchMongoDB(_email, _url) {
 }
 
 async function deleteItemShopMongoDB(_filter) {
-  mongoClient.connect(_mongoUrl, function (err, db) {
+  mongoClient.connect(_mongoUrl, 
+ {useNewUrlParser: true}, function (err, db) {
     if (err) throw err
     var dbo = db.db(_db)
     dbo.collection(_shoppingCollection).deleteOne(_filter, function (err, res) {
@@ -48,7 +51,8 @@ async function deleteItemShopMongoDB(_filter) {
 }
 
 async function deleteGraphMongoDB(_url) {
-  mongoClient.connect(_mongoUrl, function (err, db) {
+  mongoClient.connect(_mongoUrl, 
+ {useNewUrlParser: true}, function (err, db) {
     if (err) throw err
     var dbo = db.db(_db)
     dbo
@@ -62,7 +66,8 @@ async function deleteGraphMongoDB(_url) {
 }
 
 async function insertArrayMongoDB(_collection, _objectArray) {
-  mongoClient.connect(_mongoUrl, function (err, db) {
+  mongoClient.connect(_mongoUrl, 
+ {useNewUrlParser: true}, function (err, db) {
     if (err) throw err
     var dbo = db.db(_db)
     dbo.collection(_collection).insertMany(_objectArray, function (err, res) {
@@ -74,7 +79,8 @@ async function insertArrayMongoDB(_collection, _objectArray) {
 }
 
 async function checkUrlMongoDB(_collection, _url) {
-  return mongoClient.connect(_mongoUrl, function (err, db) {
+  return mongoClient.connect(_mongoUrl, 
+ {useNewUrlParser: true}, function (err, db) {
     if (err) throw err
     var dbo = db.db(_db)
     var result
@@ -100,7 +106,8 @@ async function checkUrlMongoDB(_collection, _url) {
 
 async function querySavedItemsMongoDB(_collection, _email) {
   //check if item (url) exist in DB and insert if not exist
-  mongoClient.connect(_mongoUrl, function (err, db) {
+  mongoClient.connect(_mongoUrl, 
+ {useNewUrlParser: true}, function (err, db) {
     if (err) throw err
     var dbo = db.db(_db)
     dbo
@@ -171,7 +178,8 @@ async function querySavedItemsMongoDB(_collection, _email) {
 // queryShopMongoDB query all the items in the shop collection to display to manageshop.pug
 
 async function queryReturnItemMongoDB(_collection, _url) {
-  mongoClient.connect(_mongoUrl, async function (err, db) {
+  mongoClient.connect(_mongoUrl, 
+ {useNewUrlParser: true}, async function (err, db) {
     if (err) throw err
     var dbo = db.db(_db)
     //console.log('url to check db', _url);

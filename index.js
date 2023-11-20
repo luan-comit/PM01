@@ -75,7 +75,8 @@ app.listen(port, function () {
 
 ///////////////////////////////////// GET CATEGORIES INFORMATION  //////////////////////////////////
 function getCategories() {
-  mongoClient.connect(_mongoUrl, function (err, db) {
+  mongoClient.connect(_mongoUrl, 
+ {useNewUrlParser: true}, function (err, db) {
     if (err) throw err
     var dbo = db.db(_db)
     dbo
@@ -153,7 +154,8 @@ app.get("/register", function (req, res) {
 
 app.post("/register", function (req, res) {
   console.log(req.body.email)
-  mongoClient.connect(_mongoUrl, async function (err, db) {
+  mongoClient.connect(_mongoUrl, 
+ {useNewUrlParser: true}, async function (err, db) {
     if (err) throw err
     var dbo = db.db(_db)
     dbo
@@ -205,7 +207,8 @@ app.get("/login", function (req, res) {
 app.post("/login", function (req, res) {
   var { email, password } = req.body
   console.log("params: ", email)
-  mongoClient.connect(_mongoUrl, function (err, db) {
+  mongoClient.connect(_mongoUrl, 
+ {useNewUrlParser: true}, function (err, db) {
     if (err) throw err
     var dbo = db.db(_db)
     dbo
@@ -253,7 +256,8 @@ app.get("/monitor", function (req, res) {
   }
   // querySavedItemMongoDB query all the saved items of the logged-in user email
   async function querySavedItemMongoDB() {
-    mongoClient.connect(_mongoUrl, function (err, db) {
+    mongoClient.connect(_mongoUrl, 
+ {useNewUrlParser: true}, function (err, db) {
       if (err) throw err
       var dbo = db.db(_db)
       dbo
@@ -321,7 +325,8 @@ app.get("/displaygraph", function (req, res) {
 
 app.post("/displaygraph", function (req, res) {
   //res.json(req.body);
-  mongoClient.connect(_mongoUrl, function (err, db) {
+  mongoClient.connect(_mongoUrl, 
+ {useNewUrlParser: true}, function (err, db) {
     if (err) throw err
     var dbo = db.db(_db)
     dbo
@@ -519,7 +524,8 @@ app.post("/updatePriceDate", function (req, res) {
   }
 
   async function updatePriceDateMongoDB() {
-    mongoClient.connect(_mongoUrl, function (err, db) {
+    mongoClient.connect(_mongoUrl, 
+ {useNewUrlParser: true}, function (err, db) {
       if (err) throw err
       var dbo = db.db(_db)
       dbo.collection(_itemsGraphCollection).updateOne(
@@ -698,7 +704,8 @@ app.post("/saveItem", isAuth, function (req, res) {
 
   function saveItemToMongoDB(url) {
     //check if item (url) exist in items_graph collection and copy if exist
-    mongoClient.connect(_mongoUrl, function (err, db) {
+    mongoClient.connect(_mongoUrl, 
+ {useNewUrlParser: true}, function (err, db) {
       if (err) throw err
       var dbo = db.db(_db)
       console.log("url to find::::::", url)
@@ -771,7 +778,8 @@ app.post("/saveItem", isAuth, function (req, res) {
   }
 
   function saveNewItemToFetchMongoDB() {
-    mongoClient.connect(_mongoUrl, function (err, db) {
+    mongoClient.connect(_mongoUrl, 
+ {useNewUrlParser: true}, function (err, db) {
       if (err) throw err
       var dbo = db.db(_db)
       dbo
@@ -892,7 +900,8 @@ app.get("/manageshop", isAuth, function (req, res) {
   queryShopMongoDB()
   // queryShopMongoDB query all the items in the shop collection to display to manageshop.pug
   function queryShopMongoDB() {
-    mongoClient.connect(_mongoUrl, function (err, db) {
+    mongoClient.connect(_mongoUrl, 
+ {useNewUrlParser: true}, function (err, db) {
       if (err) throw err
       var dbo = db.db(_db)
       dbo
@@ -930,7 +939,8 @@ app.get("/editshopitem/:id", isAuth, async function (req, res) {
 
   // queryShopMongoDB query all the items in the shop collection to display to manageshop.pug
   function queryItemShopMongoDB() {
-    mongoClient.connect(_mongoUrl, async function (err, db) {
+    mongoClient.connect(_mongoUrl, 
+ {useNewUrlParser: true}, async function (err, db) {
       if (err) throw err
       var dbo = db.db(_db)
       dbo
@@ -975,7 +985,8 @@ app.post("/editshopitem", isAuth, function (req, res) {
   updateItemShopMongoDB()
   // queryShopMongoDB query all the items in the shop collection to display to manageshop.pug
   function updateItemShopMongoDB() {
-    mongoClient.connect(_mongoUrl, function (err, db) {
+    mongoClient.connect(_mongoUrl, 
+ {useNewUrlParser: true}, function (err, db) {
       if (err) throw err
       var dbo = db.db(_db)
       dbo
@@ -1012,7 +1023,8 @@ app.get("/managebilling", isAuth, function (req, res) {
   queryShopMongoDB()
   // queryShopMongoDB query all the items in the shop collection to display to manageshop.pug
   async function queryShopMongoDB() {
-    mongoClient.connect(_mongoUrl, function (err, db) {
+    mongoClient.connect(_mongoUrl, 
+ {useNewUrlParser: true}, function (err, db) {
       if (err) throw err
       var dbo = db.db(_db)
       dbo
