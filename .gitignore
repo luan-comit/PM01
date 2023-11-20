@@ -1,0 +1,13 @@
+# ignore files , folders
+node_modules
+npm-debug.log
+
+#local dev env
+*.env
+*.dev
+.DS_Store
+
+#Docker
+
+Dockerfile
+docer-compose.yml
