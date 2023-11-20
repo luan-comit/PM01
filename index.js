@@ -41,11 +41,12 @@ dotenv.config()
 
 const app = express()
 app.use(express.urlencoded({ extended: true }))
+
+app.set("views", __dirname + "/views");
 app.set("view engine", "pug")
+app.use(express.static(__dirname + "/public"))
 
 ///////////////////////////////////// MANAGE LOGIN SESSION//////////////////////////////////
-
-app.use(express.static(__dirname + "/public"))
 
 mongoose
   .connect(_mongoUrl, {
