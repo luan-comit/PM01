@@ -1,10 +1,5 @@
 const express = require("express")
 const mongoClient = require("mongodb")
-const mongoose = require("mongoose")
-mongoose.set("useNewUrlParser", true)
-mongoose.set("useFindAndModify", false)
-mongoose.set("useCreateIndex", true)
-mongoose.set("useUnifiedTopology", true)
 
 const mongo_funcs = require("./js/mongoDB_funcs")
 const _mongoUrl = process.env._MONGODB_URI
