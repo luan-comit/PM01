@@ -17,9 +17,10 @@ const port = process.env._PORT || 5000
 
 const app = express()
 app.use(express.urlencoded({ extended: true }))
-app.set("view engine", "pug")
 
-app.use(express.static(__dirname + "/public"))
+app.set("views", __dirname + "/views");
+app.set("view engine", "pug")
+app.use(express.static(__dirname + "public"));
 
 app.listen(port, function () {
   console.log(`My project Online Shop running at port ${port}`)
