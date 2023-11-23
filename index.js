@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }))
 
 app.set("views", __dirname + "/views");
 app.set("view engine", "pug")
-app.use(express.static(__dirname + "public"));
+app.use(express.static(__dirname + "/public"));
 
 app.listen(port, function () {
   console.log(`My project Online Shop running at port ${port}`)
