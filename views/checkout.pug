@@ -1,0 +1,32 @@
+extends ./_bootstrap
+append styles
+    head 
+        link(rel="stylesheet", href="../css/style.css")
+        link(href='../css/justified-nav.css', rel='stylesheet')
+        link(rel="stylesheet" href="../css/checkout.css")
+        script(src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch")
+        script(src="https://js.stripe.com/v3/")
+        script(src="https://www.paypalobjects.com/api/checkout.js")
+        script(src="../js/stripe_checkout.js", defer)
+        script(src="../js/checkout.js", defer)
+        script.
+            const totalPayment = localStorage.getItem('totalBill');
+    include ./components/tables
+    body
+    // Jumbotron
+    .container
+        .jumbotron
+            h2 Checkout Payment
+                a.mycart(href='./cart')
+                    span(style='font-size: small') Back to Cart
+            .jumbotron
+                div.payment-container(align='center')
+                    form(id="payment-form")
+                        img(src='/img/stripe-checkout.jpg')
+                        div(id="payment-element")
+                    br()
+                    span(style='font-weight: bold') OR PAY WITH
+                    button(id="paypal-button")
+        .container
+            footer.footer
+                p © Price Monitor - NodeJS Project last updated Nov. 2023

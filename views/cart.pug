@@ -1,0 +1,39 @@
+extends ./_bootstrap
+append styles
+    head 
+        link(rel="stylesheet", href="../css/style.css")
+        link(href='../css/justified-nav.css', rel='stylesheet')
+        link(rel="stylesheet" href="../css/checkout.css")
+        script(src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch")
+        script(src="https://js.stripe.com/v3/")
+        script(src="https://www.paypalobjects.com/api/checkout.js")
+        script(src="../js/cart.js", defer)
+        script.
+            const listItems = !{JSON.stringify(listItems)};
+            const totalPayment = localStorage.getItem('totalBill');
+    include ./components/tables
+    body
+    // Jumbotron
+    .container
+        .jumbotron
+            h2 Your Order
+                a.mycart(href='./shop')
+                    span(style='font-size: small') Back to Shop
+            .jumbotron
+                .table-responsive
+                    table.table.table-striped
+                        thead
+                            tr
+                                th.thumnail-tbl Product
+                                th Unit Price
+                                th 
+                                th Quantity
+                                th 
+                                th Total 
+                        tbody(id='tbl-body')
+                    br()
+                    a.btn.btn-lg.btn-primary(href='./checkout', totalPayment) Proceed to Payment
+
+        .container
+            footer.footer
+                p © Price Monitor - NodeJS Project last updated Nov. 2023
