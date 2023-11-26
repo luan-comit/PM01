@@ -16,16 +16,19 @@ append styles
     // Jumbotron
     .container
         .jumbotron
-            h2 Checkout Payment
-                a.mycart(href='./cart')
-                    span(style='font-size: small') Back to Cart
+            a.mycart(href='./cart')
+                span(style='font-size: medium') Back to Cart
             .jumbotron
+                div.hint-container()
+                    span(style='color: blue') Test visa card for Stripe: 4242-4242-4242-4242, any CVC, any future date
+                    br()
+                    span(style='color: red') Test visa card for Paypal: 4214-0200-8072-0974, CVC 367, expired date 08/2025
                 div.payment-container(align='center')
                     form(id="payment-form")
                         img(src='/img/stripe-checkout.jpg')
                         div(id="payment-element")
-                    br()
-                    span(style='font-weight: bold') OR PAY WITH
+                div.payment-container(align='center')
+                    span(style='font-style: italic') Or pay with
                     button(id="paypal-button")
         .container
             footer.footer

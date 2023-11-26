@@ -20,21 +20,21 @@ body {
 }
 
 .showuser {
-  font-size:x-small;
+  font-size: x-small;
   color: blue;
 }
 .showguest {
-  font-size:x-small;
+  font-size: x-small;
   color: rgba(169, 169, 169, 0.842);
 }
-.graph-container{
+.graph-container {
   width: 800px;
   height: auto;
   border: 1px black solid;
 }
 
-.mygraph{
-  width: 100% ;
+.mygraph {
+  width: 100%;
   height: auto;
 }
 /* Customize the nav-justified links to be fill the entire space of the .navbar */
@@ -52,11 +52,24 @@ body {
   color: #777;
   text-align: center;
   background-color: #e5e5e5; /* Old browsers */
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5), to(#e5e5e5));
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#f5f5f5),
+    to(#e5e5e5)
+  );
   background-image: -webkit-linear-gradient(top, #f5f5f5 0%, #e5e5e5 100%);
-  background-image:      -o-linear-gradient(top, #f5f5f5 0%, #e5e5e5 100%);
-  background-image: -webkit-gradient(linear, left top, left bottom, from(top), color-stop(0%, #f5f5f5), to(#e5e5e5));
-  background-image:         linear-gradient(top, #f5f5f5 0%, #e5e5e5 100%);
+  background-image: -o-linear-gradient(top, #f5f5f5 0%, #e5e5e5 100%);
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(top),
+    color-stop(0%, #f5f5f5),
+    to(#e5e5e5)
+  );
+  background-image: linear-gradient(top, #f5f5f5 0%, #e5e5e5 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
   background-repeat: repeat-x; /* Repeat the gradient */
   border-bottom: 1px solid #d5d5d5;
@@ -66,8 +79,8 @@ body {
 .nav-justified > .active > a:focus {
   background-color: #ddd;
   background-image: none;
-  -webkit-box-shadow: inset 0 3px 7px rgba(0,0,0,.15);
-          box-shadow: inset 0 3px 7px rgba(0,0,0,.15);
+  -webkit-box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.15);
 }
 .nav-justified > li:first-child > a {
   border-radius: 5px 5px 0 0;
@@ -83,56 +96,61 @@ body {
   width: 100%;
 }
 
-.mytable td, th {
+.mytable td,
+th {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
-.mytable tr:nth-child(even){background-color: #f2f2f2;}
+.mytable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
 
-.mytable tr:hover {background-color: #ddd;}
+.mytable tr:hover {
+  background-color: #ddd;
+}
 
 .mytable th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
 }
-.btn-logout{
+.btn-logout {
   border: none;
   align-items: center;
   font-weight: bold;
   color: blue;
   width: 100%;
 }
-.btn-logout:hover{
+.btn-logout:hover {
   color: red;
 }
 
 .btn-link {
-    border: none;
-    outline: none;
-    background: none;
-    cursor: pointer;
-    color: #0000EE;
-    padding: 0;
-    text-decoration: underline;
-    font-family: inherit;
-    font-size: inherit;
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  color: #0000ee;
+  padding: 0;
+  text-decoration: underline;
+  font-family: inherit;
+  font-size: inherit;
 }
 
 .btn-link:hover {
   color: red;
 }
 
-.align-center-td--tbl{
+.align-center-td--tbl {
   align-items: center;
   align-content: center;
 }
 
-thumbnail-tbl{
-  white-space: nowrap;  /** added **/
+thumbnail-tbl {
+  white-space: nowrap; /** added **/
   width: 100%;
 }
 
@@ -153,8 +171,12 @@ thumbnail-tbl{
 }
 
 /* hover link to show image */
-a>div { display: none; }
-a:hover>div { display: block; }
+a > div {
+  display: none;
+}
+a:hover > div {
+  display: block;
+}
 
 /* table in shop.pug */
 
@@ -181,7 +203,7 @@ a:hover>div { display: block; }
   padding: 5px;
   border-radius: 10px;
   font-size: medium;
-  float:inherit;
+  float: inherit;
 }
 .mycart:hover {
   color: red;
@@ -189,63 +211,82 @@ a:hover>div { display: block; }
 
 .addCart {
   background-color: blue;
-  color: #FFF;
+  color: #fff;
   padding: 3px;
   border-radius: 5px;
 }
 .addCart:hover {
-  color:deeppink;
+  color: deeppink;
 }
 
 .td-sumbill {
-  font-size: larger ;
+  font-size: larger;
   font-weight: bolder;
-  color: red
+  color: red;
 }
 
-
 /* Form */
-.inputstl { 
-    padding: 9px; 
-    border: solid 1px #0077B0; 
-    outline: 0; 
-    background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #C6ECFF), to(#FFFFFF)); 
-    background: -moz-linear-gradient(top, #FFFFFF, #C6ECFF 1px, #FFFFFF 25px); 
-    box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px; 
-    -moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px; 
-    -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px; 
-} 
+.inputstl {
+  padding: 9px;
+  border: solid 1px #0077b0;
+  outline: 0;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left 25,
+    from(#ffffff),
+    color-stop(4%, #c6ecff),
+    to(#ffffff)
+  );
+  background: -moz-linear-gradient(top, #ffffff, #c6ecff 1px, #ffffff 25px);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+}
 
 .payment-container {
   margin: none;
   padding: auto;
   display: inline-table;
 }
+
 .payment-container button {
   border-radius: 35px;
-  background-color:white;
+  background-color: white;
   border: none;
   height: 40px;
   width: fit-content;
   margin: 20px 100px;
-  align-content:initial;
- /* display:list-item; */
+  align-content: initial;
+  /* display:list-item; */
 }
 
-.contact-left{
-    float: left;
-    width: 25%;
-    border: 2px black solid;
-    margin: 80px 60px;
-    padding: 20px;
+.payment-container div {
+  padding: auto;
+  align-content: center;
 }
 
+.hint-container {
+  margin-bottom: 15px;
+}
 
-.contact-right{
-    float: right;
-    width: 50%;
-    margin: 80px 0px;
-    padding: 40px;
+.hint-container span {
+  font-size: small;
+}
+
+.contact-left {
+  float: left;
+  width: 25%;
+  border: 2px black solid;
+  margin: 80px 60px;
+  padding: 20px;
+}
+
+.contact-right {
+  float: right;
+  width: 50%;
+  margin: 80px 0px;
+  padding: 40px;
 }
 
 /* Style all font awesome icons */
@@ -262,46 +303,45 @@ a:hover>div { display: block; }
   background-color: cadetblue;
 }
 
-
 /* Facebook */
 .fa-facebook {
-  background: #3B5998;
+  background: #3b5998;
   color: white;
   font-size: 150px;
 }
 
 /* Twitter */
 .fa-twitter {
-  background: #55ACEE;
+  background: #55acee;
   color: white;
 
   font-size: 150px;
 }
 
-.fa-linkedin{
-    background-color: #0A66C2;
-    color: white;
+.fa-linkedin {
+  background-color: #0a66c2;
+  color: white;
 }
 
-.fa-skype{
-    background-color: #2797E1;
-    color: white;
+.fa-skype {
+  background-color: #2797e1;
+  color: white;
 }
 
-.email-btn{
-    size: auto;
-    background-color:cornflowerblue;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    font-size: 1.2rem;
+.email-btn {
+  size: auto;
+  background-color: cornflowerblue;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 1.2rem;
 }
-.email-btn:hover{
-    color: rgb(236, 10, 29);
+.email-btn:hover {
+  color: rgb(236, 10, 29);
 }
 
-.txt-shadow{
-    text-shadow: 1px 2px rgb(23, 23, 139);
+.txt-shadow {
+  text-shadow: 1px 2px rgb(23, 23, 139);
 }
 
 @media (min-width: 768px) {
