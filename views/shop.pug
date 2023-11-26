@@ -3,46 +3,50 @@ append styles
     head 
         link(rel="stylesheet", href="../css/style.css")
         link(href='../css/justified-nav.css', rel='stylesheet')
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='description', content='Some description')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
     include ./components/tables
     body
         // Jumbotron
-        .container
-        .jumbotron
-            h3 My shopping  
-                a.btn.btn-lg.btn-success(href='./cart')
-                    span Cart 
-                    span(id="cartCount", style="color: blue")  
-                a.mycart(href='./clearcart')
-                    span Clear Cart
+        .container(class="col-8")
             .jumbotron
-                .table-responsive
-                    table.table.table-striped
-                        thead
-                            tr
-                                th #
-                                th.thumnail-tbl Image
-                                th Click to add item to cart
-                                th Description
-                                th Selling Price 
-                                th Original Price
-                        tbody
-                        each item in listItems
-                            tr
-                                td= item.pos + 1
-                                td.thumbnail-tbl
-                                        img.shop-img-td-tbl(src= item.img_src) 
-                                td
-                                    a.addCart(href='#') Add Cart
-                                td= item.title
-                                td $#{item.price}
-                                td $#{item.price_list}
+                h3 Your Shopping  
+                    a.btn.btn-lg.btn-success(href='./cart')
+                        span Cart 
+                        span(id="cartCount", style="color: blue")  
+                    a.mycart(href='./clearcart')
+                        span Clear Cart
+                .jumbotron
+                    .table-responsive
+                        table.table-striped
+                            thead
+                                tr
+                                    th #
+                                    th.thumnail-tbl Image
+                                    th Click to buy
+                                    th Description
+                                    th Selling Price 
+                                    th Original Price
+                            tbody
+                            each item in listItems
+                                tr
+                                    td= item.pos + 1
+                                    td.thumbnail-tbl
+                                            img.shop-img-td-tbl(src= item.img_src) 
+                                    td
+                                        a.addCart(href='#', style='white-space: nowrap') Add to Cart
+                                    td= item.title
+                                    td $#{item.price}
+                                    td $#{item.price_list}
         .container
             footer.footer
-                p © Shop & Payment - A JavaScript Project of Luan Le - last updated Nov. 2023
+                p © Shop & Payment - a JavaScript project of Luan Le
         script.
             const listItems = !{JSON.stringify(listItems)};
             const clearcart =  !{JSON.stringify(clearcart)};
             console.log(listItems);
-            console.log("Clear cart: ",clearcart);
+            console.log("Clear cart: ", clearcart);
 
         script(src="../js/shop.js", defer)

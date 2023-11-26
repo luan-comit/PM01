@@ -4,6 +4,9 @@ append styles
         link(rel="stylesheet", href="../css/style.css")
         link(rel='stylesheet', href='../css/justified-nav.css')
         link(rel="stylesheet", href="../css/checkout.css")
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='description', content='Some description')
+        meta(name='viewport', content='width=device-width, initial-scale=1')        
         script(src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch")
         script(src="https://js.stripe.com/v3/")
         script(src="https://www.paypalobjects.com/api/checkout.js")
@@ -13,24 +16,25 @@ append styles
             const totalPayment = localStorage.getItem('totalBill');
     include ./components/tables
     body
-    // Jumbotron
-    .container
-        .jumbotron
-            a.mycart(href='./cart')
-                span(style='font-size: medium') Back to Cart
+        // Jumbotron
+        .container(class="col-12")
             .jumbotron
-                div.hint-container()
-                    span(style='color: brown') Test visa card for Stripe: 4242-4242-4242-4242, any CVC, any future date
-                div.payment-container(align='center')
-                    form(id="payment-form")
-                        img(src='/img/stripe-checkout.jpg')
-                        div(id="payment-element")
-                br()
-                span(style='font-style: italic') Or pay with
-                div.payment-container(align='center')
-                    button(id="paypal-button")
-                div.hint-container()
-                    span(style='color: brown') Test visa card for Paypal: 4214-0200-8072-0974, CVC 367, expired date 08/2025
-        .container
-            footer.footer
-                p © Shop & Payment - A JavaScript Project of Luan Le - last updated Nov. 2023
+                h3 Your Payment
+                    a.mycart(href='./cart')
+                        span(style='font-size: medium') Back to Cart
+                .jumbotron
+                    div.hint-container()
+                        span(style='color: brown') Test visa card for Stripe: 4242-4242-4242-4242, any CVC, any future date
+                    div.payment-container(align='center')
+                        form(id="payment-form")
+                            img(src='/img/stripe-checkout.jpg')
+                            div(id="payment-element")
+                    br()
+                    span(style='font-style: italic') Or pay with
+                    div.payment-container(align='center')
+                        button(id="paypal-button")
+                    div.hint-container()
+                        span(style='color: brown') Test visa card for Paypal: 4214-0200-8072-0974, CVC 367, expired date 08/2025
+            .container
+                footer.footer
+                    p © Shop & Payment - a JavaScript project of Luan Le

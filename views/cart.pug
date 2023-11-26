@@ -2,8 +2,12 @@ extends ./_bootstrap
 append styles
     head 
         link(rel="stylesheet", href="../css/style.css")
-        link(href='../css/justified-nav.css', rel='stylesheet')
-        link(rel="stylesheet" href="../css/checkout.css")
+        link(rel="stylesheet", href="../css/justified-nav.css")
+        link(rel="stylesheet", href="../css/checkout.css")
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='description', content='Some description')
+        meta(name='viewport', content='width=device-width, initial-scale=1')        
         script(src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch")
         script(src="https://js.stripe.com/v3/")
         script(src="https://www.paypalobjects.com/api/checkout.js")
@@ -14,26 +18,26 @@ append styles
     include ./components/tables
     body
     // Jumbotron
-    .container
+    .container(class="col-8")
         .jumbotron
-            h2 Your Order
+            h3 Your Order
                 a.mycart(href='./shop')
                     span(style='font-size: small') Back to Shop
             .jumbotron
                 .table-responsive
-                    table.table.table-striped
+                    table.table-striped
                         thead
                             tr
                                 th.thumnail-tbl Product
                                 th Unit Price
-                                th 
+                                th Add 
                                 th Quantity
-                                th 
+                                th Remove
                                 th Total 
                         tbody(id='tbl-body')
                     br()
-                    a.btn.btn-lg.btn-primary(href='./checkout', totalPayment) Proceed to Payment
+                a.btn.btn-lg.btn-primary(href='./checkout', totalPayment) Proceed to Payment
 
         .container
             footer.footer
-                p © Shop & Payment - A JavaScript Project of Luan Le - last updated Nov. 2023
+                p © Shop & Payment - a JavaScript project of Luan Le

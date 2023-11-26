@@ -1,5 +1,5 @@
 body {
-  padding-top: 20px;
+  padding: auto;
 }
 
 .footer {
@@ -7,6 +7,7 @@ body {
   padding-bottom: 40px;
   margin-top: 40px;
   border-top: 1px solid #eee;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 /* Main marketing message and sign up button */
@@ -361,16 +362,5 @@ a:hover > div {
   .nav-justified > li:last-child > a {
     border-right: 0;
     border-radius: 0 5px 5px 0;
-  }
-}
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  /* Remove the padding we set earlier */
-  .masthead,
-  .marketing,
-  .footer {
-    padding-right: 0;
-    padding-left: 0;
   }
 }
