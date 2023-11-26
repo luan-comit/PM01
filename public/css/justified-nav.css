@@ -245,9 +245,10 @@ a:hover > div {
 }
 
 .payment-container {
-  margin: none;
+  margin: auto;
   padding: auto;
   display: inline-table;
+  margin-bottom: 25px;
 }
 
 .payment-container button {
@@ -272,6 +273,7 @@ a:hover > div {
 
 .hint-container span {
   font-size: small;
+  color: rgb(255, 89, 0);
 }
 
 .contact-left {
